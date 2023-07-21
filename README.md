@@ -1,2 +1,2 @@
 # spotify
-unfinished
+first ever project! (after websites)
