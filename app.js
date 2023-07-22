@@ -3,7 +3,6 @@ const APIController = (function() {
     const clientId = 'bb7ed959d49c4e4aa37504863df90a38';
     const clientSecret = 'd158d2dba8ab4df7b2a6dfd4f805096d';
 
-    // private methods
     const _getToken = async() => { 
         try {
             const result = await fetch('https://accounts.spotify.com/api/token', {
@@ -16,30 +15,85 @@ const APIController = (function() {
             });
 
             const data = await result.json();
-            console.log("Token retrival successful!");
+            console.log(`Token retrival successful!\n.\n.\n.\n`);
             return data.access_token;
         } catch (error) {
             console.log("Token retrival unsuccessful");
         } 
     }
 
-    async function getTracks(token) {
-        const result = await fetch('https://api.spotify.com/v1/tracks?ids=7ouMYWpwJ422jRcDASZB7P%2C4VqPOruhp5EdPBeR92t6lQ%2C2takcwOaAZWiXQijPHIx7B', {
+    // async function getTracks(token) {
+    //     const result = await fetch('https://api.spotify.com/v1/tracks?ids=7ouMYWpwJ422jRcDASZB7P%2C4VqPOruhp5EdPBeR92t6lQ%2C2takcwOaAZWiXQijPHIx7B', {
+    //         method: "GET", headers: { Authorization: `Bearer ${token}` }
+    //     });
+    //     const data = await result.json();
+    //     var name = data.name;
+    //     return name;
+    // }
+
+    // (async () => {
+    //     const token = await _getToken();
+    //     const data = await getTracks(token);
+    //     console.log(data);
+    // })();
+      
+
+
+    async function audioFeatures(token, id) {
+        const result = await fetch(`https://api.spotify.com/v1/audio-features/${id}`, {
             method: "GET", headers: { Authorization: `Bearer ${token}` }
         });
         const data = await result.json();
-        var name = data.name;
-        return name;
+        return data;
+    }
+
+    async function audioAnalysis(token, id) {
+        const result = await fetch(`https://api.spotify.com/v1/audio-analysis/${id}`, {
+            method: "GET", headers: { Authorization: `Bearer ${token}` }
+        });
+        const data = await result.json();
+        return data;
     }
 
     (async () => {
-        // const id = '11dFghVXANMlKmJXsNCbNl';
-        const token = await _getToken();
-        const data = await getTracks(token);
-        console.log(data);
-    })();
-      
+        try {
+          const id = '11dFghVXANMlKmJXsNCbNl';
+          const token = await _getToken();
+          const features_data = await audioFeatures(token, id);
+          const audio_data = await audioAnalysis(token, id);
+          console.log(`HERE ARE THE FEATURES: `, features_data);
+          console.log(`\n`);
+          console.log(`HERE IS THE ANALYSIS: `, audio_data);
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      })();
 
+    // The "sections" array 
+    // in the data provides information about different 
+    // sections of the song, such as the start time, 
+    // duration, and confidence. Look for the section
+    //  with the highest confidence value, as that 
+    //  is more likely to represent the main chorus 
+    //  of the song.
+
+    // Look for Energy Changes: 
+    // The chorus usually has a higher energy level
+    //  and stands out compared to other parts of 
+    //  the song. You can use loudness data to detect 
+    //  energy changes. Check for a significant 
+    //  increase in loudness in the section with 
+    //  the highest confidence.
+
+    // Use the Bars and Beats Data: The "bars" and "beats"
+    //  arrays provide timing information for bars and beats
+    //   in the song. Bars are larger musical phrases, 
+    //   and beats are the individual time units within
+    //    a bar. The chorus often has a consistent pattern
+    //    of bars and beats. Analyze the pattern of bars 
+    //    and beats around the section with the highest
+    //     confidence to see if there's a repeated pattern,
+    //      which could indicate the chorus.
 
 
 
