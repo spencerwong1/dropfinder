@@ -89,6 +89,7 @@
         const data_sections = audio_data.sections;
         // var i = 1;
         var loudest = -999;
+        var sec;
         var time;
         var assurement;
         for (const section of data_sections) {
@@ -96,12 +97,12 @@
             // confidence subject to change.
             if (loudness > loudest && confidence > 0.7) {
                 loudest = loudness;
+                time = start;
                 var min = 0;
-                while (start > 60) {
-                    time = start - 60;
+                while (time > 60) {
+                    sec = (time - 60);
                     min++;
                 }
-
                 assurement = confidence * 100;
             } 
             // console.log(`Section ${i}`);
@@ -111,7 +112,7 @@
             // console.log(`\n`);
             // i++;
         }
-        msg3.innerHTML = `BASE DROP IS AT TIME: ${min}minutes and ${time} seconds`;
+        msg3.innerHTML = `BASE DROP IS AT TIME: ${min} minutes and ${sec} seconds`;
         msg4.innerHTML = `WE KNOW THIS BECAUSE THE VOLUME IS LOUDEST AT ${loudest}`;
         msg5.innerHTML = `ALSO I AM ${assurement}% SURE HAHA`;
 
