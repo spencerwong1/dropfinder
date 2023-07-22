@@ -1,4 +1,3 @@
-//https://time4pr.netlify.app/
   const clientId = 'bb7ed959d49c4e4aa37504863df90a38';
     const clientSecret = 'd158d2dba8ab4df7b2a6dfd4f805096d';
 
@@ -89,7 +88,6 @@
         const data_sections = audio_data.sections;
         // var i = 1;
         var loudest = -999;
-        var sec;
         var time;
         var assurement;
         for (const section of data_sections) {
@@ -98,11 +96,6 @@
             if (loudness > loudest && confidence > 0.7) {
                 loudest = loudness;
                 time = start;
-                var min = 0;
-                while (time > 60) {
-                    sec = (time - 60);
-                    min++;
-                }
                 assurement = confidence * 100;
             } 
             // console.log(`Section ${i}`);
@@ -112,7 +105,12 @@
             // console.log(`\n`);
             // i++;
         }
-        msg3.innerHTML = `BASE DROP IS AT TIME: ${min} minutes and ${sec} seconds`;
+         var min = 0;
+            while (time > 60) {
+                time = time - 60;
+                min++;
+            }
+        msg3.innerHTML = `BASE DROP IS AT TIME: ${min} minutes and ${time} seconds`;
         msg4.innerHTML = `WE KNOW THIS BECAUSE THE VOLUME IS LOUDEST AT ${loudest}`;
         msg5.innerHTML = `ALSO I AM ${assurement}% SURE HAHA`;
 
