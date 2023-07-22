@@ -1,4 +1,5 @@
-   const clientId = 'bb7ed959d49c4e4aa37504863df90a38';
+https://time4pr.netlify.app/
+  const clientId = 'bb7ed959d49c4e4aa37504863df90a38';
     const clientSecret = 'd158d2dba8ab4df7b2a6dfd4f805096d';
 
     const _getToken = async() => { 
@@ -95,7 +96,7 @@
             // confidence subject to change.
             if (loudness > loudest && confidence > 0.7) {
                 loudest = loudness;
-                time = start;
+                time = start / 60;
                 assurement = confidence * 100;
             } 
             // console.log(`Section ${i}`);
