@@ -15,7 +15,7 @@ const APIController = (function() {
             });
 
             const data = await result.json();
-            console.log(`Token retrival successful!\n.\n.\n.\n`);
+            console.log(`Token retrival successful!\n.\n.\n.`);
             return data.access_token;
         } catch (error) {
             console.log("Token retrival unsuccessful");
@@ -36,16 +36,6 @@ const APIController = (function() {
     //     const data = await getTracks(token);
     //     console.log(data);
     // })();
-      
-
-
-    async function audioFeatures(token, id) {
-        const result = await fetch(`https://api.spotify.com/v1/audio-features/${id}`, {
-            method: "GET", headers: { Authorization: `Bearer ${token}` }
-        });
-        const data = await result.json();
-        return data;
-    }
 
     async function audioAnalysis(token, id) {
         const result = await fetch(`https://api.spotify.com/v1/audio-analysis/${id}`, {
@@ -57,17 +47,32 @@ const APIController = (function() {
 
     (async () => {
         try {
-          const id = '11dFghVXANMlKmJXsNCbNl';
-          const token = await _getToken();
-          const features_data = await audioFeatures(token, id);
-          const audio_data = await audioAnalysis(token, id);
-          console.log(`HERE ARE THE FEATURES: `, features_data);
-          console.log(`\n`);
-          console.log(`HERE IS THE ANALYSIS: `, audio_data);
+            // sampling legend by tevvenz as it has an obvious base drop;
+       const id = '05EG9LwFCVjkoYEWzsrHHO?si=bd2e5fafdd3e48be';
+        // sampling too cold by sickmode
+      //  const id = '0vBOyqICis94fkSwJbfUeF?si=6a2d5222010d4390&nd=1';
+        const token = await _getToken();
+        const audio_data = await audioAnalysis(token, id);
+        const data_sections = audio_data.sections;
+    
+        var i = 1;
+        for (const section of data_sections) {
+            const { start, duration, confidence, loudness} = section;
+            console.log(`Section ${i}`);
+            console.log("Start:", start);
+            console.log("Duration:", duration);
+            console.log("Confidence:", confidence);
+            console.log("Loudness:", loudness);
+            console.log(`\n`);
+            i++;
+          }
+      
+          // Other data analysis or processing can be performed here.
         } catch (error) {
           console.error('Error:', error);
         }
       })();
+      
 
     // The "sections" array 
     // in the data provides information about different 
