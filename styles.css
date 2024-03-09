@@ -56,8 +56,8 @@ body{
 }
 
 .content {
-    background-image: linear-gradient(black 10%, rgb(159,137,139));
-    /* background-image: linear-gradient(rgb(159,137,139), black 30%); */
+    /* background-image: linear-gradient(black 10%, rgb(159,137,139)); */
+    background-image: linear-gradient(rgb(159,137,139), black 30%);
     width: 100vw;
     height: 450px;
     display: flex;
