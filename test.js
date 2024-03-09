@@ -1,6 +1,7 @@
 const clientId = 'bb7ed959d49c4e4aa37504863df90a38';
 const clientSecret = 'd158d2dba8ab4df7b2a6dfd4f805096d';
 
+// Gets the token (auth)
 const _getToken = async() => { 
     try {
         const result = await fetch('https://accounts.spotify.com/api/token', {
@@ -20,6 +21,7 @@ const _getToken = async() => {
     } 
 }
 
+// Gets the track name from the spotify song link
 async function getTrackName(token, id) {
     const result = await fetch(`https://api.spotify.com/v1/tracks/${id}`, {
         method: "GET", headers: { Authorization: `Bearer ${token}` }
@@ -54,7 +56,6 @@ async function audioAnalysis(token, id) {
 }
 
 const _getTrack = async (token, trackEndPoint) => {
-
     const result = await fetch(`${trackEndPoint}`, {
         method: 'GET',
         headers: { 'Authorization' : 'Bearer ' + token}
@@ -93,8 +94,6 @@ async function main() {
     const name = await getTrackName(token, id);
     msg3.innerHTML = `your song is: ${name}`;
 
-
-    // var i = 1;
     var loudest = -999;
     var time;
     var assurement;
@@ -115,16 +114,17 @@ async function main() {
         // console.log(`\n`);
         // i++;
     }
+
     // Calculating time
         var min = 0;
         while (time > 60) {
             time = time - 60;
             min++;
         }
+
     msg4.innerHTML = `BASE DROP IS AT TIME: ${min} minutes and ${time} seconds`;
-    msg5.innerHTML = `WE KNOW THIS BECAUSE THE VOLUME IS LOUDEST AT ${loudest}`;
+    msg5.innerHTML = `This is calculated through the loudest section of the song: ${loudest}`;
     msg6.innerHTML = `${vari}`;
-    // msg5.innerHTML = `ALSO I AM ${assurement}% SURE HAHA`;
 
     console.log(time);
     console.log(loudest);

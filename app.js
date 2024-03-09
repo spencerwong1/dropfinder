@@ -65,10 +65,10 @@ const _getTrack = async (token, trackEndPoint) => {
 }
 
 
-async function myFunc() {
-    var input = document.querySelector("#user-input");
-    msg.innerHTML = "hello" + input.value;
-}
+// async function myFunc() {
+//     var input = document.querySelector("#user-input");
+//     msg.innerHTML = "hello" + input.value;
+// }
 
 async function main() {
     try {
@@ -102,7 +102,7 @@ async function main() {
     for (const section of data_sections) {
         const { start, confidence, loudness, tempo} = section;
         // confidence subject to change.
-        if (loudness > loudest && confidence > 0.7) {
+        if (loudness > loudest && confidence > 0.8) {
             loudest = loudness;
             time = start;
             assurement = confidence * 100;
