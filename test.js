@@ -20,22 +20,14 @@ const _getToken = async() => {
     } 
 }
 
-// async function getTracks(token) {
-//     const result = await fetch('https://api.spotify.com/v1/tracks?ids=7ouMYWpwJ422jRcDASZB7P%2C4VqPOruhp5EdPBeR92t6lQ%2C2takcwOaAZWiXQijPHIx7B', {
-//         method: "GET", headers: { Authorization: `Bearer ${token}` }
-//     });
-//     const data = await result.json();
-//     var name = data.name;
-//     return name;
-// }
-
-// (async () => {
-//     const token = await _getToken();
-//     const data = await getTracks(token);
-//     console.log(data);
-// })();
-
-
+async function getTrackName(token, id) {
+    const result = await fetch(`https://api.spotify.com/v1/tracks/${id}`, {
+        method: "GET", headers: { Authorization: `Bearer ${token}` }
+    });
+    const data = await result.json();
+    var name = data.name;
+    return name;
+}
 
 function getSongId(songLink) {
     // 2 cases
@@ -78,62 +70,65 @@ async function myFunc() {
     msg.innerHTML = "hello" + input.value;
 }
 
-    ( async () => {
+async function main() {
     try {
+        var input = document.querySelector("#user-input");
+        msg.innerHTML = "Link: " + input.value;
+        const id = getSongId(input.value);
+        if (id === undefined) {
+            showInvalidLink();
+            exit(1);
+        }
+        msg2.innerHTML = `ID: ${id}`;
     // sampling legend by tevvenz as it has an obvious base drop;
     // const id = '05EG9LwFCVjkoYEWzsrHHO?si=bd2e5fafdd3e48be';
     // sampling too cold by sickmode
-    const id = '77y3caTFtC3n4tGgyPUF87';
+    // const id = '0vBOyqICis94fkSwJbfUeF?si=6a2d5222010d4390&nd=1';
+    
     const token = await _getToken();
     const audio_data = await audioAnalysis(token, id);
     const data_sections = audio_data.sections;
-     var i = 1;
+
+    // Get track name:
+    const name = await getTrackName(token, id);
+    msg3.innerHTML = `your song is: ${name}`;
+
+
+    // var i = 1;
     var loudest = -999;
     var time;
     var assurement;
     var vari;
     for (const section of data_sections) {
-        const {start,
-      duration,
-      confidence,
-      loudness,
-      tempo,
-      tempo_confidence,
-      key,
-      key_confidence,
-      mode,
-      mode_confidence,
-      time_signature,
-      time_signature_confidence} = section;
+        const { start, confidence, loudness, tempo} = section;
         // confidence subject to change.
-        if (loudness > loudest && confidence > 0.7) {
+        if (loudness > loudest && confidence > 0.8) {
             loudest = loudness;
             time = start;
             assurement = confidence * 100;
-            vari = time_signature;
+            vari = tempo;
         } 
-        console.log(`Section ${i}`);
-        console.log("Start:", start);
-        console.log("Confidence:", confidence);
-        console.log("Loudness:", loudness);
-        console.log(`time_signature ${time_signature}`);
-        console.log(`mode ${mode}`);
-        console.log(`key${key}`);
-
-        console.log(`\n`);
-        i++;
+        // console.log(`Section ${i}`);
+        // console.log("Start:", start);
+        // console.log("Confidence:", confidence);
+        // console.log("Loudness:", loudness);
+        // console.log(`\n`);
+        // i++;
     }
     // Calculating time
-     var min = 0;
+        var min = 0;
         while (time > 60) {
             time = time - 60;
             min++;
         }
+    msg4.innerHTML = `BASE DROP IS AT TIME: ${min} minutes and ${time} seconds`;
+    msg5.innerHTML = `WE KNOW THIS BECAUSE THE VOLUME IS LOUDEST AT ${loudest}`;
+    msg6.innerHTML = `${vari}`;
+    // msg5.innerHTML = `ALSO I AM ${assurement}% SURE HAHA`;
 
     console.log(time);
     console.log(loudest);
-    console.log(`${min}mins and ${time} seconds`);
     } catch (error) {
-      console.error('Error:', error);
+        console.error('Error:', error);
     }
-  })();
+    };
