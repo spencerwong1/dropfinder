@@ -61,7 +61,7 @@ body{
     background-image: linear-gradient(black 10%, grey);
     /* background-image: linear-gradient(rgb(159,137,139), black 30%); */
     width: 100vw;
-    height: 400px;
+    height: 390px;
     display: flex;
 }
 
@@ -74,11 +74,17 @@ body{
     font-size: 45px;
 }
 
-.img {
+.img-container {
     height: 100%;
     width: 50%;
 }
 
+.img {
+    margin-bottom: -310px;
+    margin-left: 100px;
+    height: 300px;
+    width: 500px;
+}
 .sub-text {
     color: white;
     font-size: 15px;

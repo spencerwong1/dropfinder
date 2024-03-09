@@ -155,9 +155,9 @@ const copyLink = () => {
     var copyText = document.getElementById("link");
     copyText.select();
     navigator.clipboard.writeText(copyText.value);
-    showCopiedLink();
+    showCopiedLink(copyText.value);
   }
 
-const showCopiedLink = () => {
-    //
+const showCopiedLink = (text) => {
+    alert(`Copied to clipboard: ${text}`);
 }
