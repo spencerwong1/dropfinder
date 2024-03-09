@@ -1,6 +1,6 @@
 const clientId = 'bb7ed959d49c4e4aa37504863df90a38';
 const clientSecret = 'd158d2dba8ab4df7b2a6dfd4f805096d';
-
+//////////////////////////////////////////////////////////////////////////////////
 // Gets the token from spotify
 const _getToken = async() => { 
     try {
@@ -137,3 +137,27 @@ async function main() {
         console.error('Error:', error);
     }
     };
+
+
+//////////////////////////////////////////////////////////////////////////////////
+///////////////////////////BUTTONS AND THEIR LISTENERS////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+const playlistBtn = document.getElementById("playlist-btn");
+const songBtn = document.getElementById("sample-song-btn");
+var link = document.getElementById("link");
+
+playlistBtn.addEventListener("click", function() {
+    const newPageURL = 'https://open.spotify.com/playlist/75R6F1Alnm18z65A0NwYpe?si=9a326815b80b484f';
+    window.location.href = newPageURL;
+});
+
+const copyLink = () => {
+    var copyText = document.getElementById("link");
+    copyText.select();
+    navigator.clipboard.writeText(copyText.value);
+    showCopiedLink();
+  }
+
+const showCopiedLink = () => {
+    //
+}
