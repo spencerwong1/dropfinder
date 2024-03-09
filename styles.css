@@ -61,7 +61,7 @@ body{
     background-image: linear-gradient(black 10%, grey);
     /* background-image: linear-gradient(rgb(159,137,139), black 30%); */
     width: 100vw;
-    height: 450px;
+    height: 400px;
     display: flex;
 }
 
@@ -103,5 +103,5 @@ body{
 .white-button {
     background-color: white;
     color: black;
-    width: 170px;
+    width: 220px;
 }
