@@ -83,10 +83,12 @@ async function myFunc() {
     // sampling legend by tevvenz as it has an obvious base drop;
     // const id = '05EG9LwFCVjkoYEWzsrHHO?si=bd2e5fafdd3e48be';
     // sampling too cold by sickmode
-    const id = '1TwbzKMxFBExaDEUWqQ832?si';
+    const id = '0oKYNnouzywEqUnY7z5uhD?si';
     const token = await _getToken();
     const audio_data = await audioAnalysis(token, id);
     const data_sections = audio_data.sections;
+    const song_length = audio_data.track.duration;
+    console.log(timeCalc(song_length));
      var i = 1;
     var loudest = -999;
     var time;
@@ -112,25 +114,12 @@ async function myFunc() {
             assurement = confidence * 100;
             vari = time_signature;
         } 
-        console.log(`Section ${i}`);
-        console.log("Start time:", timeCalc(start));
-        console.log("Confidence:", confidence);
-        console.log("Loudness:", loudness);
-        // console.log(`time_signature`,time_signature);
-        // console.log('time signature confidence', time_signature_confidence);
-        // console.log(`key`, key);
-        // console.log(`key confidence`, key_confidence);
-        // console.log("mode", mode);
-        // console.log("mode_confidence", mode_confidence);
-        // console.log("tempo", tempo);
-        // console.log("tempo_confidence", tempo_confidence);
 
 
         console.log(`\n`);
         i++;
     }
-    console.log("time:", timeCalc(time));
-    console.log("loudest:", loudest);
+
     } catch (error) {
       console.error('Error:', error);
     }

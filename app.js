@@ -85,45 +85,54 @@ function showInvalidLink() {
 async function main() {
     try {
         var input = document.querySelector("#user-input");
-        msg.innerHTML = "Link: " + input.value;
-        const id = getSongId(input.value);
+
+        var id = getSongId(input.value);
         if (id === undefined) {
             showInvalidLink();
             exit(1);
         }
-        msg2.innerHTML = `ID: ${id}`;
 
         // sampling legend by tevvenz as it has an obvious base drop;
-        // const id = '05EG9LwFCVjkoYEWzsrHHO?si';
+        // id = '05EG9LwFCVjkoYEWzsrHHO?si';
         // sampling too cold by sickmode
-        // const id = '0vBOyqICis94fkSwJbfUeF?si';
+        // id = '0vBOyqICis94fkSwJbfUeF?si';
 
         const token = await _getToken();
         const audio_data = await audioAnalysis(token, id);
         const data_sections = audio_data.sections;
+        const song_length = audio_data.track.duration;
 
         // Get track name:
         const name = await getTrackName(token, id);
         msg3.innerHTML = `your song is: ${name}`;
 
+        var loudest1 = -999;
+        var time1;
+        var loudest2 = -999;
+        var time2;
+        let flag = false;
 
-        var loudest = -999;
-        var time;
+        // Confidence didnt prove to be useful
         for (const section of data_sections) {
-            const { start, confidence, loudness, tempo} = section;
-            if (loudness > loudest) {
-                loudest = loudness;
-                time = start;
-                assurement = confidence * 100;
-                vari = tempo;
-            } 
+            const {start, confidence, loudness} = section;
+            if (start > (song_length / 2)) {
+                flag = true;
+            }
+
+            if (loudness > loudest1  && flag === false) {
+                loudest1 = loudness;
+                time1 = start;
+            } else if (flag === true && loudness > loudest2) {
+                loudest2 = loudness;
+                time2 = start;
+            }
         }
         
-        msg4.innerHTML = `BASE DROP IS AT TIME: ` + timeCalc(time);
-        msg5.innerHTML = `WE KNOW THIS BECAUSE THE VOLUME IS LOUDEST AT ${loudest}`;
+        msg4.innerHTML = `FIRST BASE DROP IS AT TIME: ` + timeCalc(time1);
+        msg5.innerHTML = `FIRST VOLUME IS LOUDEST AT ${loudest1}`;
 
-        console.log(time);
-        console.log(loudest);
+        msg6.innerHTML = `SECOND BASE DROP IS AT TIME: ` + timeCalc(time2);
+        msg7.innerHTML = `SECOND VOLUME IS LOUDEST AT ${loudest2}`;
     } catch (error) {
         console.error('Error:', error);
     }
