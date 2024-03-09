@@ -7,13 +7,21 @@ body{
 @font-face { src: url(fonts/gotham-light.otf); font-family: gotham-light; }
 @font-face { src: url(fonts/gotham-black.otf);  font-family: gotham-black;  }
 
+.bold {
+    font-family: gotham-bold;
+}
+
+.light {
+    font-family: gotham-light;
+}
+
 .top-nav {
     overflow: hidden;
     background-color: black;
     height: 80px;
     display: flex;
     justify-content: space-between;
-    padding: 0 10vw;
+    padding: 0 9vw;
 }
 
 .top-nav a {
@@ -21,9 +29,8 @@ body{
     text-align: center;
     padding: 30px;
     font-size: 20px;
-    line-height: 18px;
+    line-height: 22px;
     text-decoration: none;
-    font-family: gotham-light;
 }
 
 .top-nav a:hover {
@@ -46,6 +53,52 @@ body{
     padding: 10px;
     font-size: 25px;
     line-height: 10px;
-    font-family: gotham-light;
-    font-weight: 900;
+}
+
+.content {
+    background-image: linear-gradient(black 10%, rgb(159,137,139));
+    /* background-image: linear-gradient(rgb(159,137,139), black 30%); */
+    width: 100vw;
+    height: 450px;
+    display: flex;
+}
+
+.description {
+    height: calc(100% - 40px);
+    width: calc(50% - 175px);
+    padding-left: 175px;
+    padding-top: 40px;
+    color: white;
+    font-size: 45px;
+}
+
+.img {
+    height: 100%;
+    width: 50%;
+}
+
+.sub-text {
+    color: white;
+    font-size: 15px;
+}
+
+.playlist-btn {
+    margin-top: 30px;
+    background-color: black;
+    color: white;
+    border-radius: 100px;
+    height: 50px;
+    width: 110px;
+    border: 1px solid black;
+    transition: transform 0.1s ease;
+}
+
+.playlist-btn:hover {
+    transform: scale(1.1);
+}
+
+.neutral-button {
+    background-color: rgb(159,137,139);
+    color: black;
+    width: 170px;
 }
