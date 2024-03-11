@@ -156,8 +156,8 @@ const copyLink = () => {
     copyText.select();
     navigator.clipboard.writeText(copyText.value);
     showCopiedLink(copyText.value);
-  }
+}
 
 const showCopiedLink = (text) => {
-    alert(`Copied to clipboard: ${text}`);
+    document.getElementById("sample-song-btn").innerHTML = "Link copied";
 }

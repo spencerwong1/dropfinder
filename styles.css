@@ -61,7 +61,7 @@ body{
     background-image: linear-gradient(black 10%, grey);
     /* background-image: linear-gradient(rgb(159,137,139), black 30%); */
     width: 100vw;
-    height: 390px;
+    height: 460px;
     display: flex;
 }
 
@@ -80,10 +80,11 @@ body{
 }
 
 .img {
-    margin-bottom: -310px;
-    margin-left: 100px;
-    height: 300px;
-    width: 500px;
+    opacity: 1;
+    margin-bottom: -400px;
+    margin-left: 0px;
+    height: 350px;
+    width: 700px;
 }
 .sub-text {
     color: white;
@@ -91,7 +92,7 @@ body{
 }
 
 .playlist-btn {
-    margin-top: 30px;
+    margin-top: 50px;
     background-color: black;
     color: white;
     border-radius: 100px;
@@ -110,4 +111,74 @@ body{
     background-color: white;
     color: black;
     width: 220px;
+}
+.intro {
+    margin: 0px;
+}
+
+.action-container {
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    height: 230px;
+}
+
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.input {
+    margin-top: 50px;
+    height: 50px;
+    width: 50vw;
+    background-color: transparent;
+    color: white;
+    border-radius: 50px;
+    text-align: center;
+    border: 1px solid white;
+    font-size: 15px;
+}
+
+::placeholder {
+    color: white;
+    font-family: gotham-light;
+    text-align: center;
+}
+
+.find-drop-button {
+    margin-top: 30px;
+}
+
+.title-container {
+    display: flex;
+    width: 100%;
+    height: 170px;
+    justify-content: center;
+}
+
+.explaination-container {
+    width: 100%;
+    height: 1150px;
+    background-image: linear-gradient(grey, darkgrey);
+    flex-direction: column;
+    display: flex;
+}
+
+.explaination-text {
+    margin-left: 300px;
+    margin-right: 300px;
+    color: white;
+    font-size: 18px;
+    margin-top: 0px;
+}
+
+.example-img {
+    width: calc(193px*6);
+    height: calc(122px*6);
+    margin-left: 150px;
+    margin-top: 50px;
+    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3), 0 25px 55px rgba(0, 0, 0, 0.25);
 }
