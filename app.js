@@ -22,13 +22,12 @@ const _getToken = async() => {
 }
 
 // Returns the track name
-const getTrackName = async(token, id) => {
+const getTrackDetails = async(token, id) => {
     const result = await fetch(`https://api.spotify.com/v1/tracks/${id}`, {
         method: "GET", headers: { Authorization: `Bearer ${token}` }
     });
     const data = await result.json();
-    var name = data.name;
-    return name;
+    return data;
 }
 
 // Gets the songid from link
@@ -63,13 +62,13 @@ const _getTrack = async (token, trackEndPoint) => {
 }
 
 // Calculate time
-const timeCalc = (time) => {
+const timeCalc = (seconds) => {
     var min = 0;
-    while (time > 60) {
-        time = time - 60;
+    while (seconds > 60) {
+        seconds = seconds - 60;
         min++;
     }
-    return `${min}mins and ${time}secs`;
+    return `${min}mins and ${Math.floor(seconds)}secs`;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -77,20 +76,40 @@ const timeCalc = (time) => {
 //////////////////////////////////////////////////////////////////////////////////
 // show invalid Link was used
 function showInvalidLink() {
-    msg6.innerHTML = "GET ANOTHER LINK U GROMP";
+    document.getElementById("result-page").classList.add("invalid");
+    document.getElementById("invalid").classList.add("show");
+    document.getElementById("invalid-btn").classList.add("show");
+    invalid.innerHTML = "Link is invalid";
+    document.getElementById("action-container").classList.add("hide");
 }
 
-
+var hidden = true;
 // Run when button is pressed
 async function main() {
     try {
-        var input = document.querySelector("#user-input");
+        // Scoll page
+        var targetDiv = document.getElementById("action-container");
 
+        // Scroll to the top position of the target div
+        targetDiv.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+
+        var input = document.querySelector("#user-input");
         var id = getSongId(input.value);
-        if (id === undefined) {
+        if (id === undefined && hidden === false) {
+            document.getElementById("result-page").classList.remove("show");
             showInvalidLink();
-            exit(1);
+            return;
+        } else if (id === undefined) {
+            showInvalidLink();
+            return;
         }
+
+        // Make results div appear
+        document.getElementById("result-page").classList.add("show");
 
         // sampling legend by tevvenz as it has an obvious base drop;
         // id = '05EG9LwFCVjkoYEWzsrHHO?si';
@@ -102,9 +121,18 @@ async function main() {
         const data_sections = audio_data.sections;
         const song_length = audio_data.track.duration;
 
-        // Get track name:
-        const name = await getTrackName(token, id);
-        msg3.innerHTML = `your song is: ${name}`;
+        // Get track name: if cut if too long
+        const data = await getTrackDetails(token, id);
+        if (data.name.length > 15) {
+            data.name= data.name.substring(0, 15) + "...";
+            document.getElementById("artistName").style.marginTop = "60px";
+        }
+
+        songName.innerHTML = data.name;
+        artistName.innerHTML = data.artists[0].name;
+        
+        var songImg = document.getElementById("songImg");
+        songImg.src = data.album.images[0].url;
 
         var loudest1 = -999;
         var time1;
@@ -119,7 +147,7 @@ async function main() {
                 flag = true;
             }
 
-            if (loudness > loudest1  && flag === false) {
+            if (loudness > loudest1 && flag === false) {
                 loudest1 = loudness;
                 time1 = start;
             } else if (flag === true && loudness > loudest2) {
@@ -127,12 +155,13 @@ async function main() {
                 time2 = start;
             }
         }
-        
-        msg4.innerHTML = `FIRST BASE DROP IS AT TIME: ` + timeCalc(time1);
-        msg5.innerHTML = `FIRST VOLUME IS LOUDEST AT ${loudest1}`;
+        intro.innerHTML = 'The drops are predicted to be at times: ';
+        calculated1.innerHTML = `- ${timeCalc(time1)}`
+        // msg5.innerHTML = `FIRST VOLUME IS LOUDEST AT ${loudest1}`;
 
-        msg6.innerHTML = `SECOND BASE DROP IS AT TIME: ` + timeCalc(time2);
-        msg7.innerHTML = `SECOND VOLUME IS LOUDEST AT ${loudest2}`;
+        calculated2.innerHTML = "- " + timeCalc(time2);
+        // msg7.innerHTML = `SECOND VOLUME IS LOUDEST AT ${loudest2}`;
+        hidden = false;
     } catch (error) {
         console.error('Error:', error);
     }
@@ -161,3 +190,14 @@ const copyLink = () => {
 const showCopiedLink = (text) => {
     document.getElementById("sample-song-btn").innerHTML = "Link copied";
 }
+
+// Get a reference to the refresh button
+var refreshButton = document.getElementById("invalid-btn");
+refreshButton.addEventListener("click", function() {
+    // refresh the page
+    location.reload();
+    window.scrollTo({
+        top: 0,
+        left: 0,
+    });
+});

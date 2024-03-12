@@ -31,14 +31,34 @@
             </div>
         </div>
 
-        <div class = "action-container">
+        <div class = "action-container" id = "action-container">
             <div class = "input-container">
                 <input class = "input light" id="user-input" type="text" placeholder="Enter your Spotify Song link">
             </div>
             <div class = "input-container">
-                <button class="playlist-btn find-drop-button bold white-button " id="go-btn" onclick="main()">FIND MY DROP</button>
+                <button class="playlist-btn find-drop-button bold white-button" id="go-btn" onclick="main()">FIND MY DROP</button>
             </div>
         </div>
+        
+        <!-- RESULTS OF BEATDROPS -->
+        <div class = "result-page" id = "result-page">
+            <div>
+                <img id="songImg" class = "song-img" src="" alt="song image">
+            </div>
+            <p class = "bold invalid invalid-text" id="invalid"></p> <br>
+            <div>
+                <p class = "bold description song-name" id="songName"></p>
+                <p class = "light artist" id="artistName"></p>
+            </div>
+            <div class = "calculation-container">
+                <p class = "bold calculation" id = "intro"></p>
+                <br>
+                <p class = "bold calculation" id = "calculated1"></p>
+                <p class = "bold calculation" id = "calculated2"></p>
+            </div>
+            <button class = "playlist-btn bold invalid restart-button" id="invalid-btn">Try Again</button>
+        </div>
+
 
         <div class = "explaination-container">
             <div class = "title-container">
@@ -55,14 +75,6 @@
             </p>
             <img src = "img/example.png" class = "example-img">
         </div>
-        <!-- <h1 id="msg"></h1>
-        <h1 id="msg1"></h1>
-        <h1 id="msg2"></h1>
-        <h1 id="msg3"></h1>
-        <h1 id="msg4"></h1>
-        <h1 id="msg5"></h1>
-        <h1 id="msg6"></h1>
-        <h1 id="msg7"></h1> -->
 
         <script src="app.js"></script>
     </body>

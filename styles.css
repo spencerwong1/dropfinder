@@ -123,6 +123,10 @@ body{
     height: 230px;
 }
 
+.action-container.hide {
+    display: none;
+}
+
 
 .input-container {
     display: flex;
@@ -181,4 +185,87 @@ body{
     margin-left: 150px;
     margin-top: 50px;
     box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3), 0 25px 55px rgba(0, 0, 0, 0.25);
+}
+
+
+.result-page {
+    display: flex;
+    justify-content: center;
+    height: 0px;
+    width: 100%;
+    background-color: black;
+}
+
+.result-page > * {
+    display: none;
+    color: white;
+}
+
+/* INVALID CASE */
+
+.result-page.invalid {
+    height: 180px;
+}
+
+.invalid.show {
+    display: block;
+}
+
+.invalid-text {
+    margin-top: 70px;
+    font-size: 30px;
+}
+
+.restart-button {
+    color: white;
+    background-color: black;
+    border: 1px solid white;
+    width: 200px;
+    margin-left: 20px;
+    margin-top: 63px;
+    font-size: 18px;
+}
+
+.invalid-btn.show {
+    display: block;
+    color: white;
+    background-color: grey;
+}
+
+
+.result-page.show {
+    height: 350px;
+}
+
+.result-page.show > *:not(#invalid-btn) {
+    display: block;
+}
+
+.song-img {
+    height: 300px;
+}
+
+.song-name {
+    margin: 0px;
+    height: 100px;
+    width: 500px;
+    padding-left: 40px;
+    font-size: 60px;
+}
+
+.artist {
+    padding-left: 40px;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.calculation-container {
+    padding-left: 50px;
+    height: 280px;
+    padding-top: 20px;
+    border-left: 1px solid white;
+}
+
+.calculation {
+    font-size: 25px;
 }
