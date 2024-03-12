@@ -269,3 +269,7 @@ body{
 .calculation {
     font-size: 25px;
 }
+
+.result {
+    padding-left: 40px;
+}

@@ -68,7 +68,20 @@ const timeCalc = (seconds) => {
         seconds = seconds - 60;
         min++;
     }
-    return `${min}mins and ${Math.floor(seconds)}secs`;
+    var flag = false;
+    if (min === 1) {
+        flag = true;
+    }
+    if (Math.floor(seconds) === 0) {
+        if (flag === true) {
+            return `${min}:00 min`;
+        }
+        return `${min}:00 mins`;
+    }
+    if (flag === true) {
+        return `${min}:${Math.floor(seconds)} min`;
+    }
+    return `${min}:${Math.floor(seconds)} mins`;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -155,11 +168,11 @@ async function main() {
                 time2 = start;
             }
         }
-        intro.innerHTML = 'The drops are predicted to be at times: ';
-        calculated1.innerHTML = `- ${timeCalc(time1)}`
+        intro.innerHTML = 'The predicted drop times are: ';
+        calculated1.innerHTML = timeCalc(time1)
         // msg5.innerHTML = `FIRST VOLUME IS LOUDEST AT ${loudest1}`;
 
-        calculated2.innerHTML = "- " + timeCalc(time2);
+        calculated2.innerHTML = timeCalc(time2);
         // msg7.innerHTML = `SECOND VOLUME IS LOUDEST AT ${loudest2}`;
         hidden = false;
     } catch (error) {
