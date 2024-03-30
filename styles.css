@@ -336,13 +336,13 @@ body{
     .result-page.show {
         height: 780px;
     }
+
+    .input {
+        width: 80vw;
+    }
 }
 
 @media screen and (max-width: 440px) {
-
-    .input {
-        width: 55vw;
-    }
 
     .result-page.invalid {
         height: 500px;
