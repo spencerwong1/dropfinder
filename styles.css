@@ -61,32 +61,36 @@ body{
     background-image: linear-gradient(black 10%, grey);
     /* background-image: linear-gradient(rgb(159,137,139), black 30%); */
     width: 100vw;
-    height: 460px;
+    height: 40vw;
     display: flex;
+    justify-content: center;
 }
 
 .description {
     height: calc(100% - 40px);
-    width: calc(50% - 175px);
-    padding-left: 175px;
+    width: calc(50% - 10vw);
+    padding-left: 10vw;
     padding-top: 40px;
     color: white;
-    font-size: 45px;
+    font-size: 3.5vw;
+    overflow: visible;
 }
 
 .img-container {
-    margin-top: 50px;
     height: 100%;
-    width: 50%;
+    width: 40vw;
 }
 
 .img {
+    position: absolute;
+    top: 20%;
     opacity: 1;
     margin-bottom: -400px;
     margin: 0px;
     height: auto;
     width: 40vw;
 }
+
 .sub-text {
     color: white;
     font-size: 15px;
@@ -113,6 +117,7 @@ body{
     color: black;
     width: 220px;
 }
+
 .intro {
     margin: 0px;
 }
@@ -166,7 +171,6 @@ body{
 
 .explaination-container {
     width: 100%;
-    height: 1200px;
     background-image: linear-gradient(grey, darkgrey);
     flex-direction: column;
     display: flex;
@@ -205,9 +209,18 @@ body{
     color: white;
 }
 
+.song-name-container {
+    width: 40vw;
+}
+
+
 /* INVALID CASE */
 .result-page.invalid {
     height: 180px;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: baseline;
 }
 
 .invalid.show {
@@ -277,6 +290,64 @@ body{
     padding-left: 40px;
 }
 
-@media screen and (max-width: 1200px) {
-    
+
+@media screen and (max-width: 1033px) {
+
+    .description {
+        font-size: 25px;
+        width: calc(50%);
+    }
+    .playlist-btn {
+        margin-top: 10px;
+    }
+
+    .explaination-text {
+        margin: 0px 100px;
+    }
+
+    .content {
+        height: 400px;
+    }
+
+    .restart-button {
+        margin-top: 50px;
+    }
+}
+
+@media screen and (max-width: 720px) {
+
+    .result-page {
+        flex-wrap: wrap;
+    }
+    .calculation-container {
+        border-left: none;
+        border-top: 1px solid white;
+    }
+
+    .result-page.show {
+        height: 700px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+
+    .result-page.show {
+        height: 780px;
+    }
+}
+
+@media screen and (max-width: 440px) {
+
+    .input {
+        width: 55vw;
+    }
+
+    .result-page.invalid {
+        height: 500px;
+    }
+
+    .result-page.show {
+        height: 1000px;
+    }
+
 }
