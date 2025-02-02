@@ -132,7 +132,7 @@ async function main() {
         const token = await _getToken();
         const audio_data = await audioAnalysis(token, id);
         const data_sections = audio_data.sections;
-        const song_length = audio_data.track.duration_ms;
+        const song_length = audio_data.track.duration;
 
         // Get track name: if cut if too long
         const data = await getTrackDetails(token, id);
