@@ -329,6 +329,11 @@ body{
     .result-page.show {
         height: 700px;
     }
+
+    .sub-text {
+        margin-top: -15px;
+        font-size: 10px;
+    }
 }
 
 @media screen and (max-width: 500px) {
