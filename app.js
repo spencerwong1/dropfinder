@@ -168,7 +168,7 @@ async function main() {
                 time2 = start;
             }
         }
-        intro.innerHTML = 'The predicted drop times are: ';
+        intro.innerHTML = 'Predicted drop times: ';
         calculated1.innerHTML = timeCalc(time1)
         // msg5.innerHTML = `FIRST VOLUME IS LOUDEST AT ${loudest1}`;
 
